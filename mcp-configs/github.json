@@ -1,0 +1,65 @@
+{
+  "$schema": "https://opencode.ai/schema/mcp-config.json",
+  "name": "github",
+  "description": "GitHub API integration for repos, issues, PRs, and more",
+  
+  "config": {
+    "command": "npx",
+    "args": ["-y", "@anthropic/mcp-github"],
+    "env": {
+      "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+    }
+  },
+
+  "setup": {
+    "steps": [
+      "1. Create a GitHub Personal Access Token at https://github.com/settings/tokens",
+      "2. Select scopes: repo, read:org, read:user (minimum)",
+      "3. Export token: export GITHUB_TOKEN='your-token-here'",
+      "4. Add to your shell profile for persistence"
+    ],
+    "required_scopes": [
+      "repo - Full control of private repositories",
+      "read:org - Read org membership (optional)",
+      "read:user - Read user profile data"
+    ]
+  },
+
+  "capabilities": [
+    "List repositories",
+    "Read file contents from repos",
+    "Create/update/delete files",
+    "Manage issues",
+    "Manage pull requests",
+    "Read commit history",
+    "Search code and repositories"
+  ],
+
+  "examples": {
+    "basic": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "with_enterprise": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+        "GITHUB_API_URL": "https://github.mycompany.com/api/v3"
+      }
+    }
+  },
+
+  "security": {
+    "recommendation": "Use fine-grained tokens with minimal scopes",
+    "tips": [
+      "Create separate tokens for different projects",
+      "Set token expiration dates",
+      "Never commit tokens to version control",
+      "Rotate tokens regularly"
+    ]
+  }
+}

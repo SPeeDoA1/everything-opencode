@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/schema/opencode.json",
+  "name": "minimal-setup",
+  "version": "1.0.0",
+  "description": "Minimal OpenCode setup - just rules and one command",
+
+  "rules": [
+    "./rules/coding-style.md"
+  ],
+
+  "commands": {
+    "/review": "./commands/review.md"
+  }
+}

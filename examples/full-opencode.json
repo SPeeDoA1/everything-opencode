@@ -1,0 +1,99 @@
+{
+  "$schema": "https://opencode.ai/schema/opencode.json",
+  "name": "full-featured-project",
+  "version": "1.0.0",
+  "description": "Full-featured OpenCode configuration with all options",
+
+  "agents": {
+    "primary": "./agents/primary/enhancer.md",
+    "subagents": {
+      "code-reviewer": "./agents/subagents/code-reviewer.md",
+      "security-auditor": "./agents/subagents/security-auditor.md",
+      "tdd-guide": "./agents/subagents/tdd-guide.md",
+      "architect": "./agents/subagents/architect.md",
+      "refactor-cleaner": "./agents/subagents/refactor-cleaner.md",
+      "doc-writer": "./agents/subagents/doc-writer.md",
+      "performance-optimizer": "./agents/subagents/performance-optimizer.md",
+      "debug-investigator": "./agents/subagents/debug-investigator.md"
+    }
+  },
+
+  "commands": {
+    "/review": "./commands/review.md",
+    "/security": "./commands/security.md",
+    "/tdd": "./commands/tdd.md",
+    "/refactor": "./commands/refactor.md",
+    "/docs": "./commands/docs.md",
+    "/perf": "./commands/perf.md",
+    "/debug": "./commands/debug.md",
+    "/e2e": "./commands/e2e.md"
+  },
+
+  "skills": [
+    "./skills/core/tdd-workflow/SKILL.md",
+    "./skills/core/security-review/SKILL.md",
+    "./skills/core/code-review/SKILL.md",
+    "./skills/core/git-release/SKILL.md",
+    "./skills/stacks/nextjs-patterns/SKILL.md",
+    "./skills/stacks/react-patterns/SKILL.md",
+    "./skills/stacks/typescript-strict/SKILL.md"
+  ],
+
+  "rules": [
+    "./rules/security.md",
+    "./rules/coding-style.md",
+    "./rules/testing.md",
+    "./rules/git-workflow.md",
+    "./rules/performance.md",
+    "./rules/documentation.md"
+  ],
+
+  "plugins": [
+    "./plugins/notification.ts",
+    "./plugins/env-protection.ts",
+    "./plugins/auto-format.ts",
+    "./plugins/console-log-warning.ts",
+    "./plugins/type-checker.ts",
+    "./plugins/pre-commit-check.ts",
+    "./plugins/dangerous-command-blocker.ts"
+  ],
+
+  "mcp": {
+    "servers": {
+      "filesystem": {
+        "command": "npx",
+        "args": ["-y", "@anthropic/mcp-filesystem", "/path/to/project"]
+      },
+      "github": {
+        "command": "npx",
+        "args": ["-y", "@anthropic/mcp-github"],
+        "env": {
+          "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+        }
+      }
+    }
+  },
+
+  "context": {
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "package.json",
+      "tsconfig.json"
+    ],
+    "exclude": [
+      "node_modules",
+      "dist",
+      "coverage",
+      ".git"
+    ]
+  },
+
+  "settings": {
+    "autoFormat": true,
+    "autoTest": true,
+    "strictMode": true,
+    "maxFileSize": "1MB",
+    "timeout": 30000
+  }
+}

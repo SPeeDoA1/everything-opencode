@@ -1,0 +1,94 @@
+{
+  "$schema": "https://opencode.ai/schema/mcp-config.json",
+  "name": "memory",
+  "description": "Persistent memory and knowledge base for maintaining context across sessions",
+  
+  "config": {
+    "command": "npx",
+    "args": ["-y", "@anthropic/mcp-memory"],
+    "env": {
+      "MEMORY_PATH": "${HOME}/.opencode/memory"
+    }
+  },
+
+  "setup": {
+    "steps": [
+      "1. Choose a location for the memory store",
+      "2. The directory will be created automatically",
+      "3. Memory persists across OpenCode sessions"
+    ]
+  },
+
+  "capabilities": [
+    "Store key-value data",
+    "Retrieve stored information",
+    "Create knowledge entities",
+    "Link related entities",
+    "Search stored knowledge",
+    "Delete outdated information"
+  ],
+
+  "examples": {
+    "default": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-memory"],
+      "env": {
+        "MEMORY_PATH": "${HOME}/.opencode/memory"
+      }
+    },
+    "project_specific": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-memory"],
+      "env": {
+        "MEMORY_PATH": "./.opencode/memory"
+      }
+    },
+    "with_backup": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-memory", "--backup-interval", "3600"],
+      "env": {
+        "MEMORY_PATH": "${HOME}/.opencode/memory",
+        "BACKUP_PATH": "${HOME}/.opencode/memory-backup"
+      }
+    }
+  },
+
+  "use_cases": [
+    "Remembering project decisions",
+    "Storing coding preferences",
+    "Maintaining context about codebase architecture",
+    "Tracking task progress across sessions",
+    "Building project-specific knowledge base"
+  ],
+
+  "data_structure": {
+    "entities": "Named concepts with properties",
+    "relations": "Connections between entities",
+    "observations": "Facts learned during sessions",
+    "example": {
+      "entity": {
+        "name": "UserService",
+        "type": "class",
+        "properties": {
+          "location": "src/services/user.ts",
+          "responsibility": "User CRUD operations"
+        }
+      },
+      "relation": {
+        "from": "UserService",
+        "to": "UserRepository",
+        "type": "depends_on"
+      }
+    }
+  },
+
+  "security": {
+    "recommendation": "Don't store sensitive information in memory",
+    "tips": [
+      "Memory is stored in plain text",
+      "Exclude memory directory from version control",
+      "Regularly review stored information",
+      "Clear memory when switching projects if needed"
+    ]
+  }
+}

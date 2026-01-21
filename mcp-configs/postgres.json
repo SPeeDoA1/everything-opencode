@@ -1,0 +1,72 @@
+{
+  "$schema": "https://opencode.ai/schema/mcp-config.json",
+  "name": "postgres",
+  "description": "PostgreSQL database integration for queries and schema inspection",
+  
+  "config": {
+    "command": "npx",
+    "args": ["-y", "@anthropic/mcp-postgres"],
+    "env": {
+      "DATABASE_URL": "${DATABASE_URL}"
+    }
+  },
+
+  "setup": {
+    "steps": [
+      "1. Set your PostgreSQL connection string",
+      "2. Format: postgresql://user:password@host:port/database",
+      "3. Export: export DATABASE_URL='postgresql://...'",
+      "4. For SSL: append ?sslmode=require"
+    ],
+    "connection_string_format": "postgresql://[user]:[password]@[host]:[port]/[database]?[options]"
+  },
+
+  "capabilities": [
+    "Execute SELECT queries",
+    "Inspect table schemas",
+    "List tables and views",
+    "Describe indexes",
+    "View relationships"
+  ],
+
+  "examples": {
+    "local_development": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-postgres"],
+      "env": {
+        "DATABASE_URL": "postgresql://postgres:postgres@localhost:5432/myapp_dev"
+      }
+    },
+    "with_ssl": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-postgres"],
+      "env": {
+        "DATABASE_URL": "postgresql://user:pass@host:5432/db?sslmode=require"
+      }
+    },
+    "read_only": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-postgres", "--read-only"],
+      "env": {
+        "DATABASE_URL": "${DATABASE_URL}"
+      }
+    }
+  },
+
+  "security": {
+    "recommendation": "Use read-only database users for OpenCode",
+    "tips": [
+      "Create a dedicated read-only user",
+      "Never use production credentials directly",
+      "Use connection pooling for better performance",
+      "Consider using a replica for queries"
+    ],
+    "create_readonly_user": [
+      "CREATE USER opencode_reader WITH PASSWORD 'secure_password';",
+      "GRANT CONNECT ON DATABASE myapp TO opencode_reader;",
+      "GRANT USAGE ON SCHEMA public TO opencode_reader;",
+      "GRANT SELECT ON ALL TABLES IN SCHEMA public TO opencode_reader;",
+      "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO opencode_reader;"
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "$schema": "https://opencode.ai/schema/opencode.json",
+  "name": "my-project",
+  "version": "1.0.0",
+  "description": "Basic OpenCode configuration example"
+}

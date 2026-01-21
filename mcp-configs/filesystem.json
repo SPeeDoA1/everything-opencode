@@ -1,0 +1,47 @@
+{
+  "$schema": "https://opencode.ai/schema/mcp-config.json",
+  "name": "filesystem",
+  "description": "File system access for reading and writing files",
+  
+  "config": {
+    "command": "npx",
+    "args": ["-y", "@anthropic/mcp-filesystem", "${PROJECT_ROOT}"],
+    "env": {}
+  },
+
+  "notes": [
+    "Replace ${PROJECT_ROOT} with your actual project path",
+    "You can specify multiple paths as additional arguments",
+    "Consider limiting to specific directories for security"
+  ],
+
+  "examples": {
+    "single_directory": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-filesystem", "/Users/me/projects/my-app"]
+    },
+    "multiple_directories": {
+      "command": "npx",
+      "args": [
+        "-y", 
+        "@anthropic/mcp-filesystem", 
+        "/Users/me/projects/my-app",
+        "/Users/me/projects/shared-lib"
+      ]
+    }
+  },
+
+  "capabilities": [
+    "Read files",
+    "Write files",
+    "List directories",
+    "Create directories",
+    "Delete files",
+    "Move/rename files"
+  ],
+
+  "security": {
+    "recommendation": "Limit to project directories only",
+    "avoid": ["Home directory root", "System directories", "Sensitive config folders"]
+  }
+}
